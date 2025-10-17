@@ -1,0 +1,57 @@
+﻿<Window x:Class="Nash_Decor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nash_Decor"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <ListBox x:Name="listBox" Grid.Row="1" HorizontalContentAlignment="Stretch">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <Border BorderBrush="Black" BorderThickness="1" Padding="10" Margin="5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- Основная информация о продукте -->
+                        <StackPanel>
+                            <!-- Тип | Наименование продукта -->
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                <TextBlock FontWeight="SemiBold" Text="{Binding ProductType.ProductTypeName}" />
+                                <TextBlock FontWeight="SemiBold" Text=" | " />
+                                <TextBlock FontWeight="SemiBold" Text="{Binding ProductName}" />
+                            </StackPanel>
+
+                            <!-- Артикул -->
+                            <TextBlock Text="{Binding Article}" Margin="0,2,0,0"/>
+
+                            <!-- Минимальная стоимость для партнера -->
+                            <TextBlock Margin="0,5,0,0">
+                            <Run Text="Минимальная стоимость для партнера (р): "/>
+                            <Run Text="{Binding MinPartnerPrice, StringFormat={}{0:N2}}"/>
+                            </TextBlock>
+
+                            <!-- Ширина -->
+                            <TextBlock Margin="0,2,0,0">
+                            <Run Text="Ширина (м): "/>
+                            <Run Text="{Binding RollWidth, StringFormat={}{0:N2}}"/>
+                            </TextBlock>
+                        </StackPanel>
+
+                        <!-- Расчетная стоимость -->
+                        <TextBlock Grid.Column="1"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Text="{Binding CalculatedCost, StringFormat={}{0:N2} р}"
+                        VerticalAlignment="Center"
+                        Margin="20,0,0,0"
+                        Foreground="DarkGreen"/>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
+</Window>
