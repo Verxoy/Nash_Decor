@@ -44,5 +44,40 @@ namespace Nash_Decor
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void btnAddProduct_Click(object sender, RoutedEventArgs e)
+        {
+            var productForm = new ProductFormWindow();
+            productForm.Owner = this;
+            productForm.ProductSaved += (s, args) => LoadProducts(); 
+
+            if (productForm.ShowDialog() == true)
+            {
+                statusText.Text = "Продукт успешно добавлен";
+            }
+        }
+        private void ProductItem_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            
+            var border = sender as Border;
+            if (border?.DataContext is Product selectedProduct)
+            {
+                
+                var productForm = new ProductFormWindow(selectedProduct);
+                productForm.Owner = this;
+                productForm.ProductSaved += (s, args) => LoadProducts(); 
+
+                if (productForm.ShowDialog() == true)
+                {
+                    statusText.Text = "Продукт успешно обновлен";
+                }
+
+            }
+        }
+        private void ShowErrorMessage(string message)
+        {
+            MessageBox.Show(message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
     }
 }

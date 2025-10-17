@@ -6,52 +6,76 @@
         xmlns:local="clr-namespace:Nash_Decor"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <ListBox x:Name="listBox" Grid.Row="1" HorizontalContentAlignment="Stretch">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <Border BorderBrush="Black" BorderThickness="1" Padding="10" Margin="5">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-                        <!-- Основная информация о продукте -->
-                        <StackPanel>
-                            <!-- Тип | Наименование продукта -->
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                                <TextBlock FontWeight="SemiBold" Text="{Binding ProductType.ProductTypeName}" />
-                                <TextBlock FontWeight="SemiBold" Text=" | " />
-                                <TextBlock FontWeight="SemiBold" Text="{Binding ProductName}" />
+        
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Список продукции" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Button x:Name="btnAddProduct" Content="Добавить продукт" Margin="20,0,0,0" 
+                    Padding="10,5" Click="btnAddProduct_Click"/>
+        </StackPanel>
+
+       
+        <ListBox x:Name="listBox" Grid.Row="1" HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="Black" BorderThickness="1" Padding="10" Margin="5"
+                            MouseLeftButtonUp="ProductItem_MouseLeftButtonUp">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                           
+                            <StackPanel>
+                               
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
+                                    <TextBlock FontWeight="SemiBold" Text="{Binding ProductType.ProductTypeName}" />
+                                    <TextBlock FontWeight="SemiBold" Text=" | " />
+                                    <TextBlock FontWeight="SemiBold" Text="{Binding ProductName}" />
+                                </StackPanel>
+
+                               
+                                <TextBlock Text="{Binding Article}" Margin="0,2,0,0"/>
+
+                               
+                                <TextBlock Margin="0,5,0,0">
+                                    <Run Text="Минимальная стоимость для партнера (р): "/>
+                                    <Run Text="{Binding MinPartnerPrice, StringFormat={}{0:N2}}"/>
+                                </TextBlock>
+
+                             
+                                <TextBlock Margin="0,2,0,0">
+                                    <Run Text="Ширина (м): "/>
+                                    <Run Text="{Binding RollWidth, StringFormat={}{0:N2}}"/>
+                                </TextBlock>
                             </StackPanel>
 
-                            <!-- Артикул -->
-                            <TextBlock Text="{Binding Article}" Margin="0,2,0,0"/>
+                        
+                            <TextBlock Grid.Column="1"
+                                       FontSize="16"
+                                       FontWeight="Bold"
+                                       Text="{Binding CalculatedCost, StringFormat={}{0:N2} р}"
+                                       VerticalAlignment="Center"
+                                       Margin="20,0,0,0"
+                                       Foreground="DarkGreen"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-                            <!-- Минимальная стоимость для партнера -->
-                            <TextBlock Margin="0,5,0,0">
-                            <Run Text="Минимальная стоимость для партнера (р): "/>
-                            <Run Text="{Binding MinPartnerPrice, StringFormat={}{0:N2}}"/>
-                            </TextBlock>
-
-                            <!-- Ширина -->
-                            <TextBlock Margin="0,2,0,0">
-                            <Run Text="Ширина (м): "/>
-                            <Run Text="{Binding RollWidth, StringFormat={}{0:N2}}"/>
-                            </TextBlock>
-                        </StackPanel>
-
-                        <!-- Расчетная стоимость -->
-                        <TextBlock Grid.Column="1"
-                        FontSize="16"
-                        FontWeight="Bold"
-                        Text="{Binding CalculatedCost, StringFormat={}{0:N2} р}"
-                        VerticalAlignment="Center"
-                        Margin="20,0,0,0"
-                        Foreground="DarkGreen"/>
-                    </Grid>
-                </Border>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+       
+        <StatusBar Grid.Row="2" Margin="0,10,0,0">
+            <StatusBarItem>
+                <TextBlock x:Name="statusText" Text="Готово"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
 </Window>

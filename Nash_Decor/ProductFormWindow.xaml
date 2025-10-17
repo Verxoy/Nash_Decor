@@ -1,0 +1,65 @@
+﻿<Window x:Class="Nash_Decor.ProductFormWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nash_Decor"
+        mc:Ignorable="d"
+        Title="ProductFormWindow" Height="450" Width="800">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+       
+        <TextBlock x:Name="formTitle" Text="Добавление продукта" 
+                   FontSize="18" FontWeight="Bold" Margin="0,0,0,15"/>
+
+       
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+
+           
+            <TextBlock Text="Артикул*" Margin="0,0,0,5" FontWeight="SemiBold"/>
+            <TextBox x:Name="txtArticle" Height="25" Margin="0,0,0,10"
+                     ToolTip="Уникальный идентификатор продукта"/>
+
+            
+            <TextBlock Text="Тип продукта*" Margin="0,0,0,5" FontWeight="SemiBold"/>
+            <ComboBox x:Name="cmbProductType" Height="25" Margin="0,0,0,10" 
+                      DisplayMemberPath="ProductTypeName"
+                      ToolTip="Выберите тип продукта из списка"/>
+
+          
+            <TextBlock Text="Наименование*" Margin="0,0,0,5" FontWeight="SemiBold"/>
+            <TextBox x:Name="txtProductName" Height="25" Margin="0,0,0,10"
+                     ToolTip="Введите наименование продукта"/>
+
+            
+            <TextBlock Text="Минимальная стоимость для партнера (р)*" 
+                       Margin="0,0,0,5" FontWeight="SemiBold"/>
+            <TextBox x:Name="txtMinPartnerPrice" Height="25" Margin="0,0,0,10"
+                     ToolTip="Введите стоимость с точностью до сотых. Пример: 1500.75"/>
+
+          
+            <TextBlock Text="Ширина рулона (м)*" Margin="0,0,0,5" FontWeight="SemiBold"/>
+            <TextBox x:Name="txtRollWidth" Height="25" Margin="0,0,0,15"
+                     ToolTip="Введите ширину с точностью до сотых. Пример: 1.50"/>
+
+           
+            <Border x:Name="validationBorder" Background="#FFF0F0" BorderBrush="Red" 
+                    BorderThickness="1" Padding="10" Visibility="Collapsed">
+                <TextBlock x:Name="txtValidation" TextWrapping="Wrap" Foreground="Red"/>
+            </Border>
+        </StackPanel>
+
+       
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnBack" Content="Назад" Margin="0,0,10,0" 
+                    Padding="15,5" Click="BtnBack_Click"/>
+            <Button x:Name="btnSave" Content="Сохранить" Padding="15,5" 
+                    Click="BtnSave_Click" IsDefault="True"/>
+        </StackPanel>
+    </Grid>
+</Window>
